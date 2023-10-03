@@ -5,28 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="572941c0-a726-4b58-9e6c-5b55ece767ca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PythonBinding.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pravega-client-python.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/byte_stream.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream_manager.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream_reader.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream_reader_group.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream_writer.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stream_writer_transactional.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/transaction.rs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/pravega_client_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/pravega_reader_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tox.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/python_test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/python_test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
