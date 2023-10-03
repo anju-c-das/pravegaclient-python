@@ -47,12 +47,12 @@ jobs:
           mkdir -p book/book/python
           cp html/pravega_client/pravega_client.html book/book/python
 
-      #- name: Generate Pravega Nodejs API documentation.
-       # run: |
-        #  cd nodejs && npm i && cd ..
-         # cd nodejs && npx typedoc *.ts && cd ..
-          #mkdir -p book/book/nodejs
-          #cp -r nodejs/docs/* book/book/nodejs
+      - name: Generate Pravega Nodejs API documentation.
+        run: |
+          cd nodejs && npm i && cd ..
+          cd nodejs && npx typedoc *.ts && cd ..
+          mkdir -p book/book/nodejs
+          cp -r nodejs/docs/* book/book/nodejs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
