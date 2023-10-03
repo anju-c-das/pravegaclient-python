@@ -90,7 +90,10 @@ impl StreamTransaction {
     #[pyo3(text_signature = "($self, event, routing_key=None)")]
     #[args(event, routing_key = "None", "*")]
     pub fn write_event_bytes(&mut self, event: &[u8], routing_key: Option<String>) -> PyResult<()> {
-        trace!("Writing a single event to a transaction {:?}", self.txn.txn_id());
+        trace!(
+            "Writing a single event to a transaction {:?}",
+            self.txn.txn_id()
+        );
         // to_vec creates an owned copy of the python byte array object.
         let result: Result<(), TransactionError> = self
             .runtime_handle
@@ -160,7 +163,8 @@ impl StreamTransaction {
         let abort_fut = self.txn.abort();
         let _guard = self.runtime_handle.enter();
         let timeout_fut = timeout(Duration::from_secs(TIMEOUT_IN_SECONDS), abort_fut);
-        let result_abort: Result<Result<(), TransactionError>, _> = self.runtime_handle.block_on(timeout_fut);
+        let result_abort: Result<Result<(), TransactionError>, _> =
+            self.runtime_handle.block_on(timeout_fut);
 
         match result_abort {
             Ok(t) => match t {

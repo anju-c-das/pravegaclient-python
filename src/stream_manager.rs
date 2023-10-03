@@ -230,7 +230,9 @@ impl StreamManager {
     ///
     /// Create a Stream in Pravega.
     ///
-    #[pyo3(text_signature = "($self, scope_name, stream_name, scaling_policy, retention_policy, tags)")]
+    #[pyo3(
+        text_signature = "($self, scope_name, stream_name, scaling_policy, retention_policy, tags)"
+    )]
     #[args(
         scaling_policy = "Default::default()",
         retention_policy = "Default::default()",
@@ -290,7 +292,9 @@ impl StreamManager {
     ///
     /// Update Stream Configuration in Pravega.
     ///
-    #[pyo3(text_signature = "($self, scope_name, stream_name, scaling_policy, retention_policy, tags)")]
+    #[pyo3(
+        text_signature = "($self, scope_name, stream_name, scaling_policy, retention_policy, tags)"
+    )]
     #[args(
         scaling_policy = "Default::default()",
         retention_policy = "Default::default()",
@@ -331,8 +335,14 @@ impl StreamManager {
     ///
     /// Get Stream tags from Pravega.
     ///
-    #[pyo3(text_signature = "($self, scope_name, stream_name, scaling_policy, retention_policy, tags)")]
-    pub fn get_stream_tags(&self, scope_name: &str, stream_name: &str) -> PyResult<Option<Vec<String>>> {
+    #[pyo3(
+        text_signature = "($self, scope_name, stream_name, scaling_policy, retention_policy, tags)"
+    )]
+    pub fn get_stream_tags(
+        &self,
+        scope_name: &str,
+        stream_name: &str,
+    ) -> PyResult<Option<Vec<String>>> {
         let handle = self.cf.runtime_handle();
         info!(
             "fetch tags for stream {:?} under scope {:?}",
@@ -358,7 +368,10 @@ impl StreamManager {
     #[pyo3(text_signature = "($self, scope_name, stream_name)")]
     pub fn seal_stream(&self, scope_name: &str, stream_name: &str) -> PyResult<bool> {
         let handle = self.cf.runtime_handle();
-        info!("Sealing stream {:?} under scope {:?} ", stream_name, scope_name);
+        info!(
+            "Sealing stream {:?} under scope {:?} ",
+            stream_name, scope_name
+        );
         let scoped_stream = ScopedStream {
             scope: Scope::from(scope_name.to_string()),
             stream: Stream::from(stream_name.to_string()),
@@ -380,7 +393,10 @@ impl StreamManager {
     #[pyo3(text_signature = "($self, scope_name, stream_name)")]
     pub fn delete_stream(&self, scope_name: &str, stream_name: &str) -> PyResult<bool> {
         let handle = self.cf.runtime_handle();
-        info!("Deleting stream {:?} under scope {:?} ", stream_name, scope_name);
+        info!(
+            "Deleting stream {:?} under scope {:?} ",
+            stream_name, scope_name
+        );
         let scoped_stream = ScopedStream {
             scope: Scope::from(scope_name.to_string()),
             stream: Stream::from(stream_name.to_string()),
@@ -458,7 +474,8 @@ impl StreamManager {
             self.cf
                 .create_transactional_event_writer(scoped_stream.clone(), WriterId(writer_id)),
         );
-        let txn_stream_writer = StreamTxnWriter::new(txn_writer, self.cf.runtime_handle(), scoped_stream);
+        let txn_stream_writer =
+            StreamTxnWriter::new(txn_writer, self.cf.runtime_handle(), scoped_stream);
         Ok(txn_stream_writer)
     }
 
@@ -566,8 +583,10 @@ impl StreamManager {
 
         let handle = self.cf.runtime_handle();
 
-        let delete_result =
-            handle.block_on(self.cf.delete_reader_group(scope, reader_group_name.to_string()));
+        let delete_result = handle.block_on(
+            self.cf
+                .delete_reader_group(scope, reader_group_name.to_string()),
+        );
         info!("Delete ReaderGroup {:?}", delete_result);
         match delete_result {
             Ok(_) => Ok(()),

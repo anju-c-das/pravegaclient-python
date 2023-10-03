@@ -160,14 +160,18 @@ impl StreamReaderGroup {
             "Marking reader {:?} under reader group {:?} as offline",
             reader_name, self.reader_group.name
         );
-        let res = self
-            .runtime_handle
-            .block_on(self.reader_group.reader_offline(reader_name.to_string(), None));
+        let res = self.runtime_handle.block_on(
+            self.reader_group
+                .reader_offline(reader_name.to_string(), None),
+        );
         match res {
             Ok(_) => Ok(()),
             Err(e) => match e {
                 ReaderGroupStateError::SyncError { .. } => {
-                    error!("Failed to mark the reader {:?} offline {:?} ", reader_name, e);
+                    error!(
+                        "Failed to mark the reader {:?} offline {:?} ",
+                        reader_name, e
+                    );
                     Err(exceptions::PyValueError::new_err(format!(
                         " Failed to mark reader offline {:?}",
                         e

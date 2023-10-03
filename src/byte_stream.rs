@@ -119,7 +119,10 @@ impl ByteStream {
     pub fn readinto(&mut self, buf: &PyByteArray) -> PyResult<usize> {
         trace!("Reading binary data from stream {:?} into buffer", buf);
         let destination_buffer = unsafe { buf.as_bytes_mut() };
-        match self.runtime_handle.block_on(self.reader.read(destination_buffer)) {
+        match self
+            .runtime_handle
+            .block_on(self.reader.read(destination_buffer))
+        {
             Ok(bytes_read) => Ok(bytes_read),
             Err(e) => Err(exceptions::PyOSError::new_err(format!(
                 "Error while reading from ByteStream {:?}",
@@ -242,7 +245,10 @@ impl ByteStream {
 
 impl Drop for ByteStream {
     fn drop(&mut self) {
-        info!("Drop invoked on ByteStream {:?}, invoking flush", self.stream);
+        info!(
+            "Drop invoked on ByteStream {:?}, invoking flush",
+            self.stream
+        );
         if let Err(e) = self.runtime_handle.block_on(self.writer.flush()) {
             error!("Error while flushing byteStream {:?}", e);
         }

@@ -112,18 +112,19 @@ impl StreamWriter {
     #[args(event, routing_key = "None", "*")]
     pub fn write_event_bytes(&mut self, event: &[u8], routing_key: Option<String>) -> PyResult<()> {
         // to_vec creates an owned copy of the python byte array object.
-        let write_future: tokio::sync::oneshot::Receiver<Result<(), WriterError>> = match routing_key {
-            Option::None => {
-                trace!("Writing a single event with no routing key");
-                self.runtime_handle
-                    .block_on(self.writer.write_event(event.to_vec()))
-            }
-            Option::Some(key) => {
-                trace!("Writing a single event for a given routing key {:?}", key);
-                self.runtime_handle
-                    .block_on(self.writer.write_event_by_routing_key(key, event.to_vec()))
-            }
-        };
+        let write_future: tokio::sync::oneshot::Receiver<Result<(), WriterError>> =
+            match routing_key {
+                Option::None => {
+                    trace!("Writing a single event with no routing key");
+                    self.runtime_handle
+                        .block_on(self.writer.write_event(event.to_vec()))
+                }
+                Option::Some(key) => {
+                    trace!("Writing a single event for a given routing key {:?}", key);
+                    self.runtime_handle
+                        .block_on(self.writer.write_event_by_routing_key(key, event.to_vec()))
+                }
+            };
         let _guard = self.runtime_handle.enter();
         let timeout_fut = timeout(
             Duration::from_secs(TIMEOUT_IN_SECONDS),
