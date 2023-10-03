@@ -53,7 +53,11 @@ jobs:
         #  cd nodejs && npx typedoc *.ts && cd ..
         #  mkdir -p book/book/nodejs
         #  cp -r nodejs/docs/* book/book/nodejs
-
+      - name: ANJU
+        uses: actions/checkout@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
