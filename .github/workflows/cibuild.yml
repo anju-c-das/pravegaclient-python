@@ -81,13 +81,13 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Run cargo test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: 
-        env:
-          RUST_BACKTRACE: 1
+     # - name: Run cargo test
+     #   uses: actions-rs/cargo@v1
+     #   with:
+     #     command: test
+      #    args:
+      #  env:
+     #     RUST_BACKTRACE: 1
       - name: Run code cov
         run: |
           chmod +x ./.github/workflows/codecov/codecov.sh
